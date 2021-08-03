@@ -1,11 +1,11 @@
-import React from "react";
-import { Text, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, Text, TouchableWithoutFeedback } from "react-native";
 
+import React from "react";
 import colors from "../../config/colors";
 
-export default function Button({ title, fontSize = 20, style }) {
+export default function Button({ title, fontSize = 20, style, onPress }) {
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={onPress}>
       <Text style={[styles.text, { fontSize: fontSize }, style]}>{title}</Text>
     </TouchableWithoutFeedback>
   );

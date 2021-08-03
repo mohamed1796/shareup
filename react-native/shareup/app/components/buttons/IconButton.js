@@ -1,16 +1,11 @@
-import React from "react";
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 
-export default function RoundedButton() {
+import React from "react";
+
+export default function RoundedButton({ image, onPress, size = 40, style }) {
   return (
-    <TouchableOpacity
-    // style={[styles.button, { backgroundColor: color }]} //wrap the button inside a container to modify the width
-    // onPress={onPress}
-    >
-      <Image source={require("../../assets/google-icon.png")} />
+    <TouchableOpacity style={style} onPress={onPress}>
+      <Image source={image} style={{ width: size, height: size }} />
     </TouchableOpacity>
   );
 }
-// const styles = StyleSheet.create({
-//   container: {},
-// });

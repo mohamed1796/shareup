@@ -1,65 +1,133 @@
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
 import * as Yup from "yup";
 
-import Screen from "../components/Screen";
 import {
   ErrorMessage,
   Form,
   FormField,
+  FormPicker,
   SubmitButton,
-  FormPicker
 } from "../components/forms";
-import defaultStyle from "../config/styles";
+import React, { useState } from "react";
+
+import AlternativeRegistrationContianer from "../components/AlternativeRegistrationContianer";
 import Logo from "../components/Logo";
+import Screen from "../components/Screen";
+import Separator from "../components/Separator";
+import { StyleSheet } from "react-native";
+import Text from "../components/Text";
+import UserService from "../services/UserService";
+import authApi from "../api/auth";
+import defaultStyle from "../config/styles";
+import useApi from "../hooks/useApi";
+import useAuth from "../auth/useAuth";
+import users from "../api/users";
+
 // import ActivityIndicator from "../components/ActivityIndicator";
-// import users from "../api/users";
-// import useApi from "../hooks/useApi";
-// import authApi from "../api/auth";
-// import useAuth from "../auth/useAuth";
 
 // determine all the rules for validating our form
 const validationSchema = Yup.object().shape({
   firstName: Yup.string().required().label("First Name"),
-  surname: Yup.string().required().label("Surname"),
-  birthday: Yup.string().required().label("Birthday"),
-  gender: Yup.string().required().nullable().label("Gender"), 
+  lastName: Yup.string().required().label("Last Name"),
+  // birthday: Yup.string().required().label("Birthday"),
+  // gender: Yup.string().required().nullable().label("Gender"),
   email: Yup.string().required().email().label("Email"),
   password: Yup.string().required().min(3).label("Password"),
+  confirmPassword: Yup.string()
+    .required()
+    .label("Password")
+    .when("password", {
+      is: (val) => (val && val.length > 0 ? true : false),
+      then: Yup.string().oneOf(
+        [Yup.ref("password")],
+        "Both password need to be the same"
+      ),
+    }),
 });
 
-export default function RegisterScreen(params) {
-  // const registerApi = useApi(users.register);
-  // const loginApi = useApi(authApi.login);
-  // const auth = useAuth();
+export default function RegisterScreen({ navigation }) {
   const [error, setError] = useState();
 
+  // const registerApi = useApi(users.register);
+  // const loginApi = useApi(authApi.login);
+
+  // const auth = useAuth();
+
   const handleSubmit = async (userInfo) => {
-    // const result = await registerApi.request(userInfo);
-    // if (!result.ok) {
-    //   if (result.data) setError(result.data.error);
-    //   // if we got an error from the server
-    //   else {
-    //     // if we didn't got the error from the server
-    //     setError("An unexpected error occurred");
-    //     console.log(result);
-    //   }
-    //   return;
-    // }
-    // const { data: authToken } = await loginApi.request(
-    //   userInfo.email,
-    //   userInfo.password
-    // );
-    // auth.logIn(authToken);
-    // login.handleLogin(result.data); // this method will destructure the given object.
+    // let user = { email, password, firstName, lastName };
+    console.log(
+      "register " +
+        userInfo.email +
+        " " +
+        userInfo.password +
+        " " +
+        userInfo.confirmPassword +
+        " " +
+        userInfo.firstName +
+        " " +
+        userInfo.lastName
+    );
+
+    // console.log(JSON.stringify(user))
+
+    await UserService.createUser(userInfo)
+      .then((res) => {
+        // history.push('/');
+        // setRegisterSuccessful("Your Account Is Successfully Registered");
+        navigation.navigate("LoginScreen", {
+          message: "Your Account Is Successfully Registered",
+        });
+        console.log("Your Account Is Successfully Registered");
+
+        // setShowComponent("login")
+        // handleLoginAutomatically()
+        // openModal()
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
+  // const handleSubmit = async (userInfo) => {
+  //   await UserService.createUser(userInfo)
+  //     .then((res) => {
+  //       // history.push('/');
+  //       // setRegisterSuccessful("Your Account Is Successfully Registered");
+  //       navigation.navigate("LoginScreen", {
+  //         message: "Your Account Is Successfully Registered",
+  //       });
+
+  //       // setShowComponent("login")
+  //       // handleLoginAutomatically()
+  //       // openModal()
+  //     })
+  //     .catch((error) => {
+  //       setError("User Already Registered");
+  //     });
+
+  //   const result = await registerApi.request(userInfo);
+
+  //   console.log(result);
+  //   if (!result.ok) {
+  //     if (result.data) setError(result.data.error);
+  //     // if we got an error from the server
+  //     else {
+  //       // if we didn't got the error from the server
+  //       setError("An unexpected error occurred");
+  //       console.log(result);
+  //     }
+  //     return;
+  //   }
+
+  //   auth.logIn(authToken);
+  //   login.handleLogin(result.data); // this method will destructure the given object.
+  // };
+
   const items = [
-    {  
+    {
       label: "Male",
       value: 1,
     },
-    { 
+    {
       label: "Female",
       value: 2,
     },
@@ -71,37 +139,45 @@ export default function RegisterScreen(params) {
       label: "Prefer Not to say",
       value: 4,
     },
-  ]
+  ];
 
   return (
     <>
       {/* <ActivityIndicator visible={registerApi.loading || loginApi.loading} /> */}
       <Screen style={styles.screen}>
-        {/* <Logo /> */}
+        <Logo style={styles.logo} />
+        <Text style={styles.title}>Register</Text>
         <Form
-          initialValues={{ firstName: "", surname:"",birthday:"",  email: "", password: "" }}
+          initialValues={{
+            firstName: "",
+            lastName: "",
+            // birthday: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+          }}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
           <ErrorMessage error={error} visible={error} />
           <FormField
-            autoCorrect={false} 
+            autoCorrect={false}
             name="firstName"
             placeholder="First Name"
           />
           <FormField
             autoCorrect={false}
-            name="surname"
-            placeholder="Second Name"
+            name="lastName"
+            placeholder="Last Name"
           />
-          
-          <FormField
+
+          {/* <FormField
             autoCorrect={false}
             name="birthday"
             placeholder="Enter your Birthday..."
-          />
+          /> */}
 
-          <FormPicker name="gender" items={items} placeholder="choose your gender"/>
+          {/* <FormPicker name="gender" items={items} placeholder="choose your gender"/> */}
 
           <FormField
             autoCapitalize="none"
@@ -120,8 +196,19 @@ export default function RegisterScreen(params) {
             secureTextEntry // for password
             textContentType="password" // Only for ios
           />
-          <SubmitButton title="Register" />
+          <FormField
+            autoCapitalize="none"
+            autoCorrect={false}
+            name="confirmPassword"
+            placeholder="Re-Enter passowrd"
+            secureTextEntry // for password
+            textContentType="password" // Only for ios
+          />
+          <SubmitButton title="Let's Share in?" />
         </Form>
+        <Separator text="or" />
+
+        <AlternativeRegistrationContianer />
       </Screen>
     </>
   );
@@ -129,14 +216,17 @@ export default function RegisterScreen(params) {
 
 const styles = StyleSheet.create({
   logo: {
-    width: 80,
-    height: 80,
     alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
   },
-  screen:{
-    paddingTop:50, 
-    padding:20, 
-  }, 
+  screen: {
+    paddingTop: 20,
+    padding: 20,
+  },
+  title: {
+    fontWeight: "600",
+    fontSize: 30,
+    alignSelf: "center",
+    margin: 10,
+    marginTop: 20,
+  },
 });

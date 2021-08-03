@@ -1,27 +1,26 @@
-import React, { useState, useContext } from "react";
-import { StyleSheet, View } from "react-native";
 import * as Yup from "yup";
 
-import Screen from "../components/Screen";
 import {
+  ErrorMessage,
   Form,
   FormField,
   SubmitButton,
-  ErrorMessage,
 } from "../components/forms";
-import Logo from "../components/Logo";
-import LinkButton from "../components/buttons/LinkButton";
-import Text from "../components/Text";
-import colors from "../config/colors";
-import Button from "../components/buttons/Button";
-import UserContext from "../UserContext";
-import AuthService from "../services/auth.services";
-import UserService from "../services/UserService";
-import Separator from "../components/Separator";
-import IconButton from "../components/buttons/IconButton";
+import React, { useContext, useState } from "react";
+import { StyleSheet, View } from "react-native";
 
-// import authApi from "../api/auth";
-// import useAuth from "../auth/useAuth";
+import AlternativeRegistrationContianer from "../components/AlternativeRegistrationContianer";
+import AuthService from "../services/auth.services";
+import IconButton from "../components/buttons/IconButton";
+import LinkButton from "../components/buttons/LinkButton";
+import Logo from "../components/Logo";
+import Screen from "../components/Screen";
+import Separator from "../components/Separator";
+import UserContext from "../UserContext";
+import UserService from "../services/UserService";
+import authApi from "../api/auth";
+import colors from "../config/colors";
+import useAuth from "../auth/useAuth";
 
 // determine all the rules for validating our form
 const validationSchema = Yup.object().shape({
@@ -33,10 +32,19 @@ export default function LoginScreen({ navigation }) {
   // const [email, setEmail] = useState('makbar@shareup.qa')
   // const [password, setPassword] = useState('123')
 
-  // const auth = useAuth();
+  // const { logIn } = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
 
   const { user, setUser } = useContext(UserContext);
+
+  // const handleSubmit = async ({ email, password }) => {
+  //   const result = await authApi.login(email, password);
+  //   console.log(result);
+  //   if (!result.ok) return setLoginFailed(true);
+
+  //   setLoginFailed(false);
+  //   logIn(result.data);
+  // };
 
   const handleSubmit = async ({ email, password }) => {
     await AuthService.login(email, password).then(
@@ -70,7 +78,7 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <Screen>
-      <Logo />
+      <Logo mainLogo={true} />
       <Form
         initialValues={{ email: "", password: "" }}
         onSubmit={handleSubmit}
@@ -105,14 +113,18 @@ export default function LoginScreen({ navigation }) {
         </View>
       </Form>
 
-      <View style={styles.secondContainer}>
-        <IconButton />
-      </View>
+      <AlternativeRegistrationContianer />
 
-      <Separator text="or" />
+      <Separator text="or" style={styles.saperator} />
 
       <View style={styles.thirdContainer}>
-        <LinkButton title="Create new account?" style={styles.linkedButton} />
+        <LinkButton
+          title="Create new account?"
+          style={styles.linkedButton}
+          onPress={() => {
+            navigation.navigate("SignUpScreen");
+          }}
+        />
       </View>
     </Screen>
   );
@@ -134,5 +146,15 @@ const styles = StyleSheet.create({
   linkedButton: {
     margin: 10,
   },
-  secondContainer: {},
+  secondContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "center",
+  },
+  iconButton: {
+    margin: 20,
+  },
+  saperator: {
+    paddingHorizontal: 20,
+  },
 });
