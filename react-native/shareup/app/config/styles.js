@@ -22,4 +22,10 @@ export default {
   formScreen: {
     padding: 10,
   },
+  circledProfilePicture: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    marginRight: 10,
+  },
 };

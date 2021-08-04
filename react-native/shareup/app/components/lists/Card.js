@@ -11,6 +11,7 @@ import colors from "../../config/colors";
 import settings from "../../config/settings";
 import Text from "../Text";
 import Separator from "../Separator";
+import defaultStyles from "../../config/styles";
 
 export default function Card({
   firstName,
@@ -30,7 +31,7 @@ export default function Card({
         <View style={styles.header}>
           <Image
             source={{ uri: settings.apiUrl + profileImage }}
-            style={styles.profileImage}
+            style={defaultStyles.circledProfilePicture}
           />
           <View>
             <Text>
@@ -100,12 +101,6 @@ const styles = StyleSheet.create({
   },
   separator: {
     marginVertical: 10,
-  },
-  profileImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
-    marginRight: 10,
   },
   postText: {
     fontSize: 25,

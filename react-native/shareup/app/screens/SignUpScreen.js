@@ -44,7 +44,7 @@ const validationSchema = Yup.object().shape({
     }),
 });
 
-export default function RegisterScreen({ navigation }) {
+export default function SignUpScreen({ navigation }) {
   const [error, setError] = useState();
 
   // const registerApi = useApi(users.register);

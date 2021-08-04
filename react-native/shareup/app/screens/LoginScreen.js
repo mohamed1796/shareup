@@ -21,6 +21,7 @@ import UserService from "../services/UserService";
 import authApi from "../api/auth";
 import colors from "../config/colors";
 import useAuth from "../auth/useAuth";
+import routes from "../navigation/routes";
 
 // determine all the rules for validating our form
 const validationSchema = Yup.object().shape({
@@ -122,7 +123,7 @@ export default function LoginScreen({ navigation }) {
           title="Create new account?"
           style={styles.linkedButton}
           onPress={() => {
-            navigation.navigate("SignUpScreen");
+            navigation.navigate(routes.SIGNUP);
           }}
         />
       </View>
