@@ -1,24 +1,16 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  TextInput,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
+import { StyleSheet, View, Image, TextInput, FlatList } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import Modal from "react-native-modal";
 
-import Screen from "../components/Screen";
 import defaultStyles from "../config/styles";
 import Text from "../components/Text";
 import colors from "../config/colors";
 import Icon from "../components/Icon";
 import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
+import Screen from "../components/Screen";
 
 const items = [
   {
@@ -49,7 +41,7 @@ const items = [
 
 export default function AddPostScreen(props) {
   return (
-    <Screen style={styles.container}>
+    <Screen style={styles.container} statusPadding={false}>
       <View style={styles.topContainer}>
         {/** Header */}
         <View style={styles.row}>
@@ -64,13 +56,13 @@ export default function AddPostScreen(props) {
                 <FontAwesome5
                   name="user-friends"
                   size={15}
-                  color={colors.medium}
+                  color={colors.dimGray}
                 />
                 <Text style={styles.headerTabText}>Friends</Text>
                 <MaterialIcons
                   name="keyboard-arrow-down"
                   size={15}
-                  color={colors.medium}
+                  color={colors.dimGray}
                 />
               </View>
 
@@ -78,13 +70,13 @@ export default function AddPostScreen(props) {
                 <MaterialCommunityIcons
                   name="plus"
                   size={15}
-                  color={colors.medium}
+                  color={colors.dimGray}
                 />
                 <Text style={styles.headerTabText}>Albums</Text>
                 <MaterialIcons
                   name="keyboard-arrow-down"
                   size={15}
-                  color={colors.medium}
+                  color={colors.dimGray}
                 />
               </View>
             </View>
@@ -94,7 +86,7 @@ export default function AddPostScreen(props) {
         {/**Content */}
         <TextInput
           placeholder="We Share, Do you?"
-          placeholderTextColor={colors.medium}
+          placeholderTextColor={colors.dimGray}
           style={{ height: "80%", textAlignVertical: "top" }}
           numberOfLines={10}
           multiline={true}
@@ -115,7 +107,7 @@ export default function AddPostScreen(props) {
                 <Icon
                   name={item.icon.name}
                   type={item.icon.type}
-                  color={colors.medium}
+                  color={colors.dimGray}
                 />
               }
             />
@@ -141,6 +133,10 @@ export default function AddPostScreen(props) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    // backgroundColor: colors.white,
+    // flex: 1,
+  },
   topContainer: {
     padding: 10,
     flex: 1,
@@ -161,14 +157,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderWidth: 1,
-    borderColor: colors.medium,
+    borderColor: colors.dimGray,
     margin: 5,
     borderRadius: 5,
     padding: 2,
   },
   headerTabText: {
     fontSize: 14,
-    color: colors.medium,
+    color: colors.dimGray,
     marginHorizontal: 5,
   },
   modal: {

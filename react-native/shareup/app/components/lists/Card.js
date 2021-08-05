@@ -26,9 +26,9 @@ export default function Card({
   style,
 }) {
   return (
-    <TouchableWithoutFeedback onPress={onPress} style={styles.shadow}>
+    <TouchableWithoutFeedback onPress={onPress}>
       <View style={[styles.card, style]}>
-        <View style={styles.header}>
+        <View style={styles.userInfo}>
           <Image
             source={{ uri: settings.apiUrl + profileImage }}
             style={defaultStyles.circledProfilePicture}
@@ -65,20 +65,13 @@ export default function Card({
 }
 const styles = StyleSheet.create({
   card: {
-    // backgroundColor
-    // backgroundColor: colors.white,
-    borderColor: colors.light,
+    borderColor: colors.grayX11Gray,
+    borderWidth: 1,
+    backgroundColor: colors.white,
     marginBottom: 20,
     overflow: "hidden",
-    padding: 20,
-    elevation: 2,
-  },
-  shadow: {
-    padding: 20,
-    shadowColor: colors.medium,
-    shadowOpacity: 1,
-    shadowRadius: 15,
-    shadowOffset: { width: 1, height: 13 },
+    padding: 5,
+    borderRadius: 20,
   },
   image: {
     width: "100%",
@@ -87,8 +80,8 @@ const styles = StyleSheet.create({
   subtitle: {
     marginBottom: 7,
   },
-  header: {
-    paddingBottom: 30,
+  userInfo: {
+    paddingBottom: 20,
     display: "flex",
     flexDirection: "row",
   },
@@ -97,7 +90,7 @@ const styles = StyleSheet.create({
   },
   postDate: {
     fontSize: 16,
-    color: colors.medium,
+    color: colors.dimGray,
   },
   separator: {
     marginVertical: 10,

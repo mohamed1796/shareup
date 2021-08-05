@@ -3,6 +3,7 @@ import { View, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import defaultStyles from "../config/styles.js";
+import colors from "../config/colors.js";
 
 export default function AppTextInput({
   icon,
@@ -16,12 +17,12 @@ export default function AppTextInput({
         <MaterialCommunityIcons
           name={icon}
           size={20}
-          color={defaultStyles.colors.medium}
+          color={colors.dimGray}
           style={defaultStyles.inputIcon}
         />
       )}
       <TextInput
-        placeholderTextColor={defaultStyles.colors.medium}
+        placeholderTextColor={colors.dimGray}
         style={[
           defaultStyles.text,
           { width: "100%", textAlign: centerText ? "center" : "auto" },

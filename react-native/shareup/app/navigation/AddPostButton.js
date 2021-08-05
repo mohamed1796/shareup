@@ -20,7 +20,7 @@ export default function AddPostButton({ onPress }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: colors.primary,
+    backgroundColor: colors.iondigoDye,
     borderRadius: 40,
     borderColor: colors.white,
     borderWidth: 10,
@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
     height: 80,
     justifyContent: "center",
     width: 80,
+    padding: 10,
   },
 });

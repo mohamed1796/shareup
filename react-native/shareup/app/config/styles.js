@@ -9,7 +9,7 @@ export default {
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
   inputContainer: {
-    backgroundColor: colors.light,
+    backgroundColor: colors.aliceBlue,
     borderRadius: 25,
     flexDirection: "row",
     padding: 15,

@@ -20,7 +20,8 @@ export default function App() {
     <UserContext.Provider value={{ user, setUser }}>
       <NavigationContainer>
         {/* <AppNavigator /> */}
-        {user ? <NewsFeedScreen /> : <AuthNavigator />}
+        {/* <AuthNavigator /> */}
+        {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </UserContext.Provider>
   );

@@ -7,7 +7,7 @@ import ButtonText from "./ButtonText";
 export default function AppButton({
   title,
   onPress,
-  color = colors.primary,
+  color = colors.iondigoDye,
   width = "100%",
 }) {
   return (
@@ -22,7 +22,6 @@ export default function AppButton({
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: colors.primary,
     borderRadius: 25,
     justifyContent: "center",
     alignItems: "center",

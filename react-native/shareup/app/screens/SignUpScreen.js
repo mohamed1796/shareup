@@ -217,6 +217,7 @@ export default function SignUpScreen({ navigation }) {
 const styles = StyleSheet.create({
   logo: {
     alignSelf: "center",
+    marginTop: 20,
   },
   screen: {
     paddingTop: 20,

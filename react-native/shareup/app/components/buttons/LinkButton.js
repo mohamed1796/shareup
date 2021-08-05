@@ -13,6 +13,6 @@ export default function Button({ title, fontSize = 20, style, onPress }) {
 
 const styles = StyleSheet.create({
   text: {
-    color: colors.primary,
+    color: colors.iondigoDye,
   },
 });

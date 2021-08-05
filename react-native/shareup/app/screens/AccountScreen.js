@@ -1,11 +1,12 @@
 import React from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import Screen from "../components/Screen";
 
 export default function AccountScreen(props) {
   return (
-    <View style={styles.container}>
+    <Screen style={styles.container}>
       <Text>Account Screen</Text>
-    </View>
+    </Screen>
   );
 }
 

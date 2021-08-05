@@ -13,6 +13,7 @@ import AccountScreen from "../screens/AccountScreen";
 
 const Tab = createBottomTabNavigator();
 console.log(`Tab: `, Tab);
+
 export default function AppNavigator() {
   // useNotifications();
 

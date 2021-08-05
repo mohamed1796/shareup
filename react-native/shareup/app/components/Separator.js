@@ -8,7 +8,7 @@ export default function Separator({ text, style }) {
     if (text)
       return (
         <View>
-          <Text style={{ width: 50, textAlign: "center" }}>{text}</Text>
+          <Text style={styles.text}>{text}</Text>
         </View>
       );
     else return <View></View>;
@@ -24,6 +24,11 @@ export default function Separator({ text, style }) {
 }
 
 const styles = StyleSheet.create({
+  text: {
+    width: 50,
+    textAlign: "center",
+    color: colors.dimGray,
+  },
   outer: {
     flexDirection: "row",
     alignItems: "center",
@@ -31,6 +36,6 @@ const styles = StyleSheet.create({
   inner: {
     flex: 1,
     height: 1,
-    backgroundColor: colors.medium,
+    backgroundColor: colors.grayX11Gray,
   },
 });

@@ -78,7 +78,7 @@ export default function LoginScreen({ navigation }) {
   };
 
   return (
-    <Screen>
+    <Screen statusPadding={false}>
       <Logo mainLogo={true} />
       <Form
         initialValues={{ email: "", password: "" }}
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: "bold",
-    color: colors.medium,
+    color: colors.dimGray,
   },
   linkedButton: {
     margin: 10,

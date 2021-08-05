@@ -5,6 +5,7 @@ import PostService from "../services/PostService";
 import UserContext from "../UserContext";
 import Screen from "../components/Screen";
 import Card from "../components/lists/Card";
+import colors from "../config/colors";
 
 export default function NewsFeedScreen() {
   const { user } = useContext(UserContext);
@@ -24,6 +25,7 @@ export default function NewsFeedScreen() {
   return (
     <Screen style={styles.container}>
       <FlatList
+        style={styles.flatlist}
         data={posts}
         keyExtractor={(post) => post.id.toString()}
         showsVerticalScrollIndicator={false}
@@ -47,8 +49,9 @@ const styles = StyleSheet.create({
     display: "flex",
     flex: 1,
     justifyContent: "center",
-    padding: 10,
     paddingTop: 30,
-    // alignItems:"center"
+  },
+  flatlist: {
+    padding: 10,
   },
 });

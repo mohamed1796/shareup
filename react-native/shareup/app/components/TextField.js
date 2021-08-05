@@ -1,9 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { StyleSheet, TextInput, View } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import React from "react";
