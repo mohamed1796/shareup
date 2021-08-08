@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     marginBottom: 3,
-    color: colors.black,
+    color: colors.dark,
     fontWeight: "500",
   },
-  subTitle: { fontSize: 16, color: colors.medium },
+  subTitle: { fontSize: 16, color: colors.dimGray },
 });

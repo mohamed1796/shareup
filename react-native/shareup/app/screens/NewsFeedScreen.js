@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { StyleSheet, FlatList, View } from "react-native";
+import React, { useContext, useEffect, useState, useCallback } from "react";
+import { StyleSheet, FlatList } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 
 import PostService from "../services/PostService";
 import UserContext from "../UserContext";
@@ -12,9 +13,14 @@ export default function NewsFeedScreen() {
 
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
-    loadNews();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      loadNews();
+    }, [2])
+  );
+  // useEffect(() => {
+  //   loadNews();
+  // }, []);
 
   const loadNews = async () => {
     const response = await PostService.getPostForUser(user.email);

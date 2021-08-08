@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Image, TextInput, FlatList } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -11,6 +11,11 @@ import Icon from "../components/Icon";
 import ListItem from "../components/lists/ListItem";
 import ListItemSeparator from "../components/lists/ListItemSeparator";
 import Screen from "../components/Screen";
+import UserContext from "../UserContext";
+import Button from "../components/buttons/LinkButton";
+import IconButton from "../components/buttons/IconButton";
+import PostService from "../services/PostService";
+import routes from "../navigation/routes";
 
 const items = [
   {
@@ -39,18 +44,77 @@ const items = [
   },
 ];
 
-export default function AddPostScreen(props) {
+export default function AddPostScreen({ navigation }) {
+  const { user } = useContext(UserContext);
+  // const [postText, setPostText] = useState("");
+  const [uploadError, setUploadError] = useState("");
+  // const [files, setFiles] = useState({});
+  const [postContent, setPostContent] = useState("");
+
+  const handleAddPost = async () => {
+    // event.preventDefault();
+    setUploadError("");
+    console.log("uploading post working");
+    if (
+      postContent === "" //&&
+      // Object.keys(files).length === 0 &&
+      // files.constructor === Object
+    ) {
+      console.log("cant be null");
+      // setUploadError("Please Insert A Text or an Image");
+      setUploadError("Please Insert A Text");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("content", postContent);
+    // console.log(" this is the files" + files);
+    // formData.append(`files`, files);
+    PostService.createPost(user.id, formData).then((res) => {
+      // console.log(JSON.stringify(res));
+      setPostContent("");
+      // handleRemoveImage();
+      // setRefresh(res.data);
+    });
+    // this.props.navigation.state.params.resetData();
+    navigation.navigate(routes.FEED);
+  };
+
+  const handleonChangeText = (text) => {
+    setPostContent(text);
+    console.log(postContent);
+  };
+
   return (
-    <Screen style={styles.container} statusPadding={false}>
+    <Screen style={styles.container}>
+      {/** Header */}
+      <View style={styles.header}>
+        <IconButton
+          style={styles.botton}
+          onPress={() => alert("This is a button!")}
+          IconComponent={
+            <Icon
+              name="close"
+              color={colors.dimGray}
+              type="AntDesign"
+              backgroundColor={colors.LightGray}
+            />
+          }
+        />
+        <Text style={styles.headerTitle}>Create Post</Text>
+        <Button onPress={handleAddPost} title="Post" style={styles.botton} />
+      </View>
       <View style={styles.topContainer}>
-        {/** Header */}
+        {/** User */}
         <View style={styles.row}>
           <Image
             source={require("../assets/default-profile-picture.png")}
             style={defaultStyles.circledProfilePicture}
           />
           <View style={styles.column}>
-            <Text style={styles.userName}>New user</Text>
+            <Text style={styles.userName}>
+              {user.firstName} {user.lastName}
+            </Text>
             <View style={styles.row}>
               <View style={[styles.headerTab, styles.row]}>
                 <FontAwesome5
@@ -90,6 +154,7 @@ export default function AddPostScreen(props) {
           style={{ height: "80%", textAlignVertical: "top" }}
           numberOfLines={10}
           multiline={true}
+          onChangeText={handleonChangeText}
         />
       </View>
 
@@ -136,6 +201,28 @@ const styles = StyleSheet.create({
   container: {
     // backgroundColor: colors.white,
     // flex: 1,
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: colors.LightGray,
+    height: 60,
+    width: "100%",
+    // borderBottomWidth: 1,
+    elevation: 2,
+    shadowColor: "rgba(0, 0, 0, 0.1)",
+    shadowOpacity: 1,
+    shadowRadius: 15,
+    shadowOffset: { width: 1, height: 13 },
+    // paddingHorizontal: 40,
+  },
+  botton: { color: colors.dimGray },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "bold",
   },
   topContainer: {
     padding: 10,

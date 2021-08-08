@@ -16,7 +16,7 @@ export default {
   aliceBlue: "#E2EEF6", // for textFields
   dimGray: "#6e6969",
   grayX11Gray: "#C1BEBE",
-  black: "#000",
+  LightGray: "#D7D5D5",
   dark: "#0c0c0c",
   white: "#fff", //  for background
 };

@@ -6,6 +6,7 @@ import { AppNavigator, AuthNavigator } from "./app/navigation";
 import NewsFeedScreen from "./app/screens/NewsFeedScreen";
 import UserContext from "./app/UserContext";
 import AddPostScreen from "./app/screens/AddPostScreen";
+import Icon from "./app/components/Icon";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -16,11 +17,8 @@ export default function App() {
   };
 
   return (
-    // <AddPostScreen />
     <UserContext.Provider value={{ user, setUser }}>
       <NavigationContainer>
-        {/* <AppNavigator /> */}
-        {/* <AuthNavigator /> */}
         {user ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
     </UserContext.Provider>
