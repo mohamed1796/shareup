@@ -1,0 +1,2 @@
+To publish to expo run the command:
+    expo publish --release-channel staging

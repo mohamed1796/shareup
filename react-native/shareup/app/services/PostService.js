@@ -65,8 +65,16 @@ class PostService {
     return result;
   };
 
-  createPost = async (userId, formdata) => {
-    const result = await authAxios.post(`posts/${userId}`, formdata);
+  createPost = async (userId, postContent) => {
+    const formData = new FormData();
+    formData.append("content", postContent.text);
+    formData.append(`files`, {
+      name: "postImage",
+      type: "image/jpg",
+      uri: postContent.image,
+    });
+
+    const result = await authAxios.post(`posts/${userId}`, formData);
     return result;
   };
 

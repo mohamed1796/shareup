@@ -1,16 +1,14 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import colors from "../config/colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Icon from "../components/Icon";
 
 export default function AddPostButton({ onPress }) {
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.container}>
-        <MaterialCommunityIcons
-          name="plus-circle"
-          color={colors.white}
-          size={40}
+        <Icon
+          image={require("../assets/tab-navigation-icons/add-icon.png")}
+          size={50}
         />
       </View>
     </TouchableOpacity>
@@ -19,15 +17,7 @@ export default function AddPostButton({ onPress }) {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    backgroundColor: colors.iondigoDye,
-    borderRadius: 40,
-    borderColor: colors.white,
-    borderWidth: 10,
-    bottom: 20,
-    height: 80,
-    justifyContent: "center",
-    width: 80,
-    padding: 10,
+    bottom: 15,
+    // opacity: 0.8,
   },
 });

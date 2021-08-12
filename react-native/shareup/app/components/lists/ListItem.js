@@ -1,5 +1,10 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableHighlight } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  TouchableWithoutFeedback,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../../config/colors";
@@ -14,12 +19,8 @@ export default function ListItem({
   style,
 }) {
   return (
-    <TouchableHighlight
-      style={[styles.container, style]}
-      underlayColor={colors.light}
-      onPress={onPress}
-    >
-      <View style={styles.listItem}>
+    <TouchableWithoutFeedback onPress={onPress}>
+      <View style={[styles.listItem, style]}>
         {IconComponent}
         {image && <Image source={image} style={styles.image} />}
         <View style={styles.detailsContainer}>
@@ -33,15 +34,15 @@ export default function ListItem({
           )}
         </View>
       </View>
-    </TouchableHighlight>
+    </TouchableWithoutFeedback>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { backgroundColor: colors.white, padding: 15 },
   listItem: {
     flexDirection: "row",
     alignItems: "center",
+    padding: 10,
   },
   detailsContainer: { marginLeft: 10, flex: 1 },
   image: { height: 70, width: 70, borderRadius: 35 },

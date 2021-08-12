@@ -45,7 +45,7 @@ class AuthService {
       const user = await AsyncStorage.getItem("user");
       if (user !== null) {
         // console.log("This is the user: " + user);
-        let token = JSON.parse(user);
+        let token = await JSON.parse(user);
         // console.log(token);
         return token;
       } else {

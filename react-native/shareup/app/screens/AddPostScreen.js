@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { StyleSheet, View, Image, TextInput, FlatList } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -16,73 +16,88 @@ import Button from "../components/buttons/LinkButton";
 import IconButton from "../components/buttons/IconButton";
 import PostService from "../services/PostService";
 import routes from "../navigation/routes";
-
-const items = [
-  {
-    title: "Photos",
-    icon: { name: "image", type: "Feather" },
-  },
-  {
-    title: "Tag People",
-    icon: { name: "tagso", type: "AntDesign" },
-  },
-  {
-    title: "Sell and Share",
-    icon: { name: "upload", type: "AntDesign" },
-  },
-  {
-    title: "Feeling/Activity",
-    icon: { name: "smiley", type: "Fontisto" },
-  },
-  {
-    title: "Location",
-    icon: { name: "md-location-outline", type: "Ionicons" },
-  },
-  {
-    title: "Live",
-    icon: { name: "image", type: "Feather" },
-  },
-];
+import useImagePicker from "../hooks/useImagePicker";
 
 export default function AddPostScreen({ navigation }) {
   const { user } = useContext(UserContext);
+  const [error, setError] = useState("");
+  const [text, setText] = useState("");
+  const { file, pickImage, clearFile } = useImagePicker();
+  const [displayeImage, setDisplayeImage] = useState(false);
+  // const [postContent, setPostContent] = useState({});
+  // const [files, setFiles] = useState();
   // const [postText, setPostText] = useState("");
-  const [uploadError, setUploadError] = useState("");
-  // const [files, setFiles] = useState({});
-  const [postContent, setPostContent] = useState("");
 
-  const handleAddPost = async () => {
-    // event.preventDefault();
-    setUploadError("");
-    console.log("uploading post working");
-    if (
-      postContent === "" //&&
-      // Object.keys(files).length === 0 &&
-      // files.constructor === Object
-    ) {
-      console.log("cant be null");
-      // setUploadError("Please Insert A Text or an Image");
-      setUploadError("Please Insert A Text");
-      return;
-    }
+  const textInputRef = useRef();
 
-    const formData = new FormData();
-    formData.append("content", postContent);
-    // console.log(" this is the files" + files);
-    // formData.append(`files`, files);
-    PostService.createPost(user.id, formData).then((res) => {
-      // console.log(JSON.stringify(res));
-      setPostContent("");
-      // handleRemoveImage();
-      // setRefresh(res.data);
-    });
-    // this.props.navigation.state.params.resetData();
-    navigation.navigate(routes.FEED);
-  };
+  const items = [
+    {
+      title: "Photos",
+      icon: { name: "image", type: "Feather" },
+      onPress: () => {
+        setDisplayeImage(true);
+        pickImage();
+      },
+    },
+    {
+      title: "Tag People",
+      icon: { name: "tagso", type: "AntDesign" },
+      onPress: () => {
+        console.log("Tag People");
+      },
+    },
+    {
+      title: "Sell and Share",
+      icon: { name: "upload", type: "AntDesign" },
+      onPress: () => {
+        console.log("Sell and Share");
+      },
+    },
+    {
+      title: "Feeling/Activity",
+      icon: { name: "smiley", type: "Fontisto" },
+      onPress: () => {
+        console.log("Feeling/Activity");
+      },
+    },
+    {
+      title: "Location",
+      icon: { name: "md-location-outline", type: "Ionicons" },
+      onPress: () => {
+        console.log("Location");
+      },
+    },
+    {
+      title: "Live",
+      icon: { name: "image", type: "Feather" },
+      onPress: () => {
+        console.log("Live");
+      },
+    },
+  ];
 
   const handleonChangeText = (text) => {
-    setPostContent(text);
-    console.log(postContent);
+    setText(text);
+  };
+
+  const handleAddPost = async () => {
+    if (text === "" && Object.keys(file).length === 0) {
+      setError("Can't Create empty post");
+    }
+
+    console.log(file.uri);
+    const postContent = {
+      text: text,
+      image: file.uri,
+    };
+
+    await PostService.createPost(user.id, postContent);
+
+    navigation.navigate(routes.FEED);
+    setText("");
+    clearFile();
+    setDisplayeImage(false);
+    textInputRef.current.clear();
   };
 
   return (
@@ -91,13 +106,13 @@ export default function AddPostScreen({ navigation }) {
       <View style={styles.header}>
         <IconButton
           style={styles.botton}
-          onPress={() => alert("This is a button!")}
+          onPress={() => navigation.navigate(routes.FEED)}
           IconComponent={
             <Icon
               name="close"
               color={colors.dimGray}
               type="AntDesign"
-              backgroundColor={colors.LightGray}
+              backgroundColor={colors.white}
             />
           }
         />
@@ -151,11 +166,16 @@ export default function AddPostScreen({ navigation }) {
         <TextInput
           placeholder="We Share, Do you?"
           placeholderTextColor={colors.dimGray}
-          style={{ height: "80%", textAlignVertical: "top" }}
+          style={styles.textInput}
           numberOfLines={10}
           multiline={true}
           onChangeText={handleonChangeText}
+          ref={textInputRef}
         />
+
+        {displayeImage && (
+          <Image source={{ uri: file.uri }} style={styles.image} />
+        )}
       </View>
 
       <View style={[styles.tempModal, styles.topBorderRadius]}>
@@ -167,6 +187,7 @@ export default function AddPostScreen({ navigation }) {
             <ListItem
               style={styles.topBorderRadius}
               title={item.title}
+              onPress={item.onPress}
               // onPress={() => navigation.navigate(item.screen)}
               IconComponent={
                 <Icon
@@ -208,16 +229,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: colors.LightGray,
+    backgroundColor: colors.white,
     height: 60,
     width: "100%",
-    // borderBottomWidth: 1,
-    elevation: 2,
-    shadowColor: "rgba(0, 0, 0, 0.1)",
-    shadowOpacity: 1,
-    shadowRadius: 15,
-    shadowOffset: { width: 1, height: 13 },
-    // paddingHorizontal: 40,
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   },
   botton: { color: colors.dimGray },
   headerTitle: {
@@ -269,7 +291,7 @@ const styles = StyleSheet.create({
   },
   tempModal: {
     marginTop: 10,
-    flex: 0.5,
+    flex: 0.4,
     height: "100%",
     backgroundColor: colors.white,
     shadowColor: colors.dark,
@@ -284,5 +306,10 @@ const styles = StyleSheet.create({
   topBorderRadius: {
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+  },
+  textInput: { height: "8%", textAlignVertical: "top" },
+  image: {
+    width: "100%",
+    height: 400,
   },
 });

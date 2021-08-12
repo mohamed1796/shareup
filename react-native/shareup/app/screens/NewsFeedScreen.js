@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -8,6 +8,7 @@ import Screen from "../components/Screen";
 import Card from "../components/lists/Card";
 import colors from "../config/colors";
 
+//ToDo: Sort posts by Published day.
 export default function NewsFeedScreen() {
   const { user } = useContext(UserContext);
 
@@ -24,10 +25,9 @@ export default function NewsFeedScreen() {
 
   const loadNews = async () => {
     const response = await PostService.getPostForUser(user.email);
+    console.log(response.data);
     setPosts(response.data);
   };
-
-  console.log("Posts List:::", posts);
   return (
     <Screen style={styles.container}>
       <FlatList

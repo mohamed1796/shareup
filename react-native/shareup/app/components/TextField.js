@@ -1,21 +1,31 @@
 import { StyleSheet, TextInput, View } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Icon from "../components/Icon";
 import React from "react";
+import defaultStyles from "../config/styles";
 
 export default function LoginScreen({
   placeholder,
   value,
   iconName,
+  icontype,
   iconColor,
+  iconSize = 40,
+  backgroundColor,
+  iconBackgroundColor = backgroundColor,
+  width = "100%",
+  height = 30,
 }) {
   return (
-    <View style={styles.container}>
-      <MaterialCommunityIcons
+    <View style={[styles.container, { backgroundColor, width, height }]}>
+      <Icon
         name={iconName}
-        size={24}
+        size={iconSize}
         color={iconColor}
         style={styles.icon}
+        type={icontype}
+        backgroundColor={iconBackgroundColor}
       />
       <TextInput
         placeholder={placeholder}
@@ -32,7 +42,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "floralwhite",
     width: "80%",
-    margin: 10,
     padding: 20,
     paddingHorizontal: 40,
     alignItems: "center",

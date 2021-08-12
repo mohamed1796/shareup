@@ -8,7 +8,7 @@ const settings = {
     apiUrl: "http://192.168.100.2:8080",
   },
   prod: {
-    apiUrl: "http://192.168.100.239:8080",
+    apiUrl: "http://192.168.100.2:8080",
   },
 };
 

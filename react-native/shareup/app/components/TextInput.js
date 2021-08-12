@@ -9,10 +9,11 @@ export default function AppTextInput({
   icon,
   width = "100%",
   centerText = false,
+  backgroundColor = colors.aliceBlue,
   ...otherProps
 }) {
   return (
-    <View style={[defaultStyles.inputContainer, { width }]}>
+    <View style={[defaultStyles.inputContainer, { width, backgroundColor }]}>
       {icon && (
         <MaterialCommunityIcons
           name={icon}

@@ -7,6 +7,9 @@ import NewsFeedScreen from "./app/screens/NewsFeedScreen";
 import UserContext from "./app/UserContext";
 import AddPostScreen from "./app/screens/AddPostScreen";
 import Icon from "./app/components/Icon";
+import { View } from "react-native";
+
+import GroupsScreen from "./app/screens/GroupsScreen";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -17,10 +20,11 @@ export default function App() {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <NavigationContainer>
-        {user ? <AppNavigator /> : <AuthNavigator />}
-      </NavigationContainer>
-    </UserContext.Provider>
+    <GroupsScreen />
+    // <UserContext.Provider value={{ user, setUser }}>
+    //   <NavigationContainer>
+    //     {user ? <AppNavigator /> : <AuthNavigator />}
+    //   </NavigationContainer>
+    // </UserContext.Provider>
   );
 }

@@ -2,6 +2,7 @@
   "expo": {
     "name": "shareup",
     "slug": "shareup",
+    "privacy": "unlisted",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/icon.png",
@@ -17,9 +18,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true, 
+      "bundleIdentifier": "qa.shareup", 
+      "buildNumber":"1.1.0"
     },
     "android": {
+      "package": "qa.shareup",
+      "versionCode": 1, 
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -27,6 +32,7 @@
     },
     "web": {
       "favicon": "./app/assets/favicon.png"
-    }
+    },
+    "description": ""
   }
 }

@@ -24,10 +24,16 @@ export default function Icon({
   backgroundColor = "#fff",
   color = "#000",
   type = "MaterialCommunityIcons",
+  ...otherProps
 }) {
   const renederImageorIcon = () => {
     if (image)
-      return <Image source={image} style={{ width: size, height: size }} />;
+      return (
+        <Image
+          source={image}
+          style={{ width: size, height: size, resizeMode: "contain" }}
+        />
+      );
     else
       return (
         <>
@@ -36,46 +42,112 @@ export default function Icon({
               size={size * 0.5}
               name={name}
               color={color}
+              {...otherProps}
             />
           )}
           {type === "AntDesign" && (
-            <AntDesign size={size * 0.5} name={name} color={color} />
+            <AntDesign
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "Entypo" && (
-            <Entypo size={size * 0.5} name={name} color={color} />
+            <Entypo
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "EvilIcons" && (
-            <EvilIcons size={size * 0.5} name={name} color={color} />
+            <EvilIcons
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "Feather" && (
-            <Feather size={size * 0.5} name={name} color={color} />
+            <Feather
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "FontAwesome" && (
-            <FontAwesome size={size * 0.5} name={name} color={color} />
+            <FontAwesome
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "FontAwesome5" && (
-            <FontAwesome5 size={size * 0.5} name={name} color={color} />
+            <FontAwesome5
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "Fontisto" && (
-            <Fontisto size={size * 0.5} name={name} color={color} />
+            <Fontisto
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "Foundation" && (
-            <Foundation size={size * 0.5} name={name} color={color} />
+            <Foundation
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "MaterialIcons" && (
-            <MaterialIcons size={size * 0.5} name={name} color={color} />
+            <MaterialIcons
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "Octicons" && (
-            <Octicons size={size * 0.5} name={name} color={color} />
+            <Octicons
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "SimpleLineIcons" && (
-            <SimpleLineIcons size={size * 0.5} name={name} color={color} />
+            <SimpleLineIcons
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "Zocial" && (
-            <Zocial size={size * 0.5} name={name} color={color} />
+            <Zocial
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
           {type === "Ionicons" && (
-            <Ionicons size={size * 0.5} name={name} color={color} />
+            <Ionicons
+              size={size * 0.5}
+              name={name}
+              color={color}
+              {...otherProps}
+            />
           )}
         </>
       );

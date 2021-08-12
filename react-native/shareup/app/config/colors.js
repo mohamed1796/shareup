@@ -17,6 +17,7 @@ export default {
   dimGray: "#6e6969",
   grayX11Gray: "#C1BEBE",
   LightGray: "#D7D5D5",
+  lighterGray: "#EFEFEF",
   dark: "#0c0c0c",
   white: "#fff", //  for background
 };
