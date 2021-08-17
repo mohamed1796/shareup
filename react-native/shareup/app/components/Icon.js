@@ -24,9 +24,11 @@ export default function Icon({
   backgroundColor = "#fff",
   color = "#000",
   type = "MaterialCommunityIcons",
+  backgroundSizeRatio = 0.5,
+  style,
   ...otherProps
 }) {
-  const renederImageorIcon = () => {
+  const renderImageOrIcon = () => {
     if (image)
       return (
         <Image
@@ -39,7 +41,7 @@ export default function Icon({
         <>
           {type === "MaterialCommunityIcons" && (
             <MaterialCommunityIcons
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -47,7 +49,7 @@ export default function Icon({
           )}
           {type === "AntDesign" && (
             <AntDesign
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -55,7 +57,7 @@ export default function Icon({
           )}
           {type === "Entypo" && (
             <Entypo
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -63,7 +65,7 @@ export default function Icon({
           )}
           {type === "EvilIcons" && (
             <EvilIcons
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -71,7 +73,7 @@ export default function Icon({
           )}
           {type === "Feather" && (
             <Feather
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -79,7 +81,7 @@ export default function Icon({
           )}
           {type === "FontAwesome" && (
             <FontAwesome
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -87,7 +89,7 @@ export default function Icon({
           )}
           {type === "FontAwesome5" && (
             <FontAwesome5
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -95,7 +97,7 @@ export default function Icon({
           )}
           {type === "Fontisto" && (
             <Fontisto
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -103,7 +105,7 @@ export default function Icon({
           )}
           {type === "Foundation" && (
             <Foundation
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -111,7 +113,7 @@ export default function Icon({
           )}
           {type === "MaterialIcons" && (
             <MaterialIcons
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -119,7 +121,7 @@ export default function Icon({
           )}
           {type === "Octicons" && (
             <Octicons
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -127,7 +129,7 @@ export default function Icon({
           )}
           {type === "SimpleLineIcons" && (
             <SimpleLineIcons
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -135,7 +137,7 @@ export default function Icon({
           )}
           {type === "Zocial" && (
             <Zocial
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -143,7 +145,7 @@ export default function Icon({
           )}
           {type === "Ionicons" && (
             <Ionicons
-              size={size * 0.5}
+              size={size * backgroundSizeRatio}
               name={name}
               color={color}
               {...otherProps}
@@ -154,16 +156,19 @@ export default function Icon({
   };
   return (
     <View
-      style={{
-        width: size,
-        height: size,
-        borderRadius: size / 2,
-        backgroundColor,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
+      style={[
+        {
+          width: size,
+          height: size,
+          borderRadius: size / 2,
+          backgroundColor,
+          justifyContent: "center",
+          alignItems: "center",
+        },
+        style,
+      ]}
     >
-      {renederImageorIcon()}
+      {renderImageOrIcon()}
     </View>
   );
 }

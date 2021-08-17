@@ -1,7 +1,7 @@
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, Dimensions, Image, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
 import routes from "./routes";
 import AddPostButton from "./AddPostButton";
@@ -15,6 +15,8 @@ import Icon from "../components/Icon";
 import GroupsScreen from "../screens/GroupsScreen";
 import ActivityScreen from "../screens/ActivityScreen";
 import CustomHeaderBar from "./CustomHeaderBar";
+import defaultStyles from "../config/styles";
+import UserProfilePicture from "../components/UserProfilePicture";
 
 // import FeedNavigator from "./FeedNavigator";
 // import AccountNavigator from "./AccountNavigator";
@@ -65,6 +67,7 @@ export default function AppNavigator() {
         name="Groups"
         component={GroupsScreen}
         options={{
+          headerShown: false,
           tabBarIcon: ({ size, color }) => (
             <Icon
               image={require("../assets/tab-navigation-icons/groups-icon.png")}
@@ -91,7 +94,7 @@ export default function AppNavigator() {
           ),
           headerLeft: ({ navigation }) => (
             <IconButton
-              style={styles.botton}
+              style={styles.button}
               onPress={() => navigation.navigate(routes.FEED)}
               IconComponent={
                 <Icon name="close" color={colors.dimGray} type="AntDesign" />
@@ -102,7 +105,7 @@ export default function AppNavigator() {
             <Button
               onPress={handleAddPost}
               title="Post"
-              style={styles.botton}
+              style={styles.button}
             />
           ),
         })}
@@ -112,6 +115,22 @@ export default function AppNavigator() {
         name="Activity"
         component={ActivityScreen}
         options={{
+          headerTitle: "",
+          headerStyle: {
+            elevation: 0,
+            shadowRadius: 0,
+            shadowOffset: {
+              height: 0,
+            },
+          },
+          headerRight: () => (
+            <UserProfilePicture size={50} style={styles.headerRight} />
+          ),
+          headerLeft: () => (
+            <Text style={[styles.headerLeft, defaultStyles.titleFontSize]}>
+              Activity
+            </Text>
+          ),
           tabBarIcon: ({ size, color }) => (
             <Icon
               image={require("../assets/tab-navigation-icons/bell-icon.png")}
@@ -134,9 +153,17 @@ export default function AppNavigator() {
 }
 
 const styles = StyleSheet.create({
-  botton: {
+  button: {
     backgroundColor: colors.white,
     color: colors.dimGray,
     marginHorizontal: 20,
+  },
+  headerLeft: {
+    marginLeft: 10,
+    margin: 5,
+  },
+  headerRight: {
+    marginRight: 10,
+    margin: 5,
   },
 });

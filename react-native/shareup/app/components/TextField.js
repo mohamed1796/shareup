@@ -1,58 +1,57 @@
-import { StyleSheet, TextInput, View } from "react-native";
+/**
+ *
+ * This is less customizable Text input
+ */
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Icon from "../components/Icon";
 import React from "react";
-import defaultStyles from "../config/styles";
+import { View, TextInput, StyleSheet } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export default function LoginScreen({
-  placeholder,
-  value,
+import Icon from "../components/Icon";
+import defaultStyles from "../config/styles.js";
+import colors from "../config/colors.js";
+
+export default function AppTextField({
   iconName,
-  icontype,
-  iconColor,
-  iconSize = 40,
-  backgroundColor,
-  iconBackgroundColor = backgroundColor,
+  iconType,
+  iconImage,
   width = "100%",
-  height = 30,
+  height = 40,
+  centerText = false,
+  backgroundColor = colors.lighterGray,
+  style,
+  ...otherProps
 }) {
   return (
-    <View style={[styles.container, { backgroundColor, width, height }]}>
-      <Icon
-        name={iconName}
-        size={iconSize}
-        color={iconColor}
-        style={styles.icon}
-        type={icontype}
-        backgroundColor={iconBackgroundColor}
-      />
+    <View style={[styles.container, { width, height, backgroundColor }, style]}>
+      {iconName && (
+        <Icon
+          name={iconName}
+          type={iconType}
+          image={iconImage}
+          size={40}
+          color={colors.dimGray}
+          backgroundColor={backgroundColor}
+          style={styles.icon}
+        />
+      )}
       <TextInput
-        placeholder={placeholder}
-        value={value}
-        style={styles.textInput}
+        placeholderTextColor={colors.dimGray}
+        style={styles.text}
+        {...otherProps}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    display: "flex",
-    flexDirection: "row",
-    backgroundColor: "floralwhite",
+  text: {
     width: "80%",
-    padding: 20,
-    paddingHorizontal: 40,
+    color: colors.dark,
+  },
+  container: {
+    flexDirection: "row",
     alignItems: "center",
-    borderRadius: 50,
-  },
-  image: {
-    width: 300,
-    height: 300,
-  },
-  textInput: {
-    fontSize: 16,
-    marginLeft: 10,
+    borderRadius: 25,
   },
 });

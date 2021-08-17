@@ -12,7 +12,7 @@ export default function AppButton({
 }) {
   return (
     <TouchableOpacity
-      style={[styles.button, { backgroundColor: color }]} //wrap the button inside a container to modify the width
+      style={[styles.button, { backgroundColor: color, width }]} //wrap the button inside a container to modify the width
       onPress={onPress}
     >
       <ButtonText>{title}</ButtonText>

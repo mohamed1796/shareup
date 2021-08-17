@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 import colors from "../config/colors";
 
-export default function Separator({ text, style }) {
+export default function Separator({ text, style, color }) {
   const inside = () => {
     if (text)
       return (
@@ -16,9 +16,9 @@ export default function Separator({ text, style }) {
 
   return (
     <View style={[styles.outer, style]}>
-      <View style={styles.inner} />
+      <View style={[styles.inner, { backgroundColor: color }]} />
       {inside()}
-      <View style={styles.inner} />
+      <View style={[styles.inner, { backgroundColor: color }]} />
     </View>
   );
 }

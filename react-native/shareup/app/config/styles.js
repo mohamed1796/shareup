@@ -28,4 +28,19 @@ export default {
     borderRadius: 50,
     marginRight: 10,
   },
+  titleFontSize: {
+    fontWeight: "bold",
+    fontSize: 22,
+  },
+  shadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 6,
+  },
 };

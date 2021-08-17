@@ -1,7 +1,11 @@
+/**
+ *
+ * This is less customizable Text input
+ */
+
 import React from "react";
 import { View, TextInput } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
 import defaultStyles from "../config/styles.js";
 import colors from "../config/colors.js";
 

@@ -77,8 +77,9 @@ export default function LoginScreen({ navigation }) {
     // console.log("end getUser")
   };
 
+  // ToDO: Fix the layout
   return (
-    <Screen statusPadding={false}>
+    <Screen statusPadding>
       <Logo mainLogo={true} />
       <Form
         initialValues={{ email: "", password: "" }}
