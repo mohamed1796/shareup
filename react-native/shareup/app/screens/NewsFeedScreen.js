@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from "react";
+import React, { useContext, useState, useCallback, useEffect } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -7,6 +7,7 @@ import UserContext from "../UserContext";
 import Screen from "../components/Screen";
 import Card from "../components/lists/Card";
 import colors from "../config/colors";
+import FeedTop from "../components/FeedTop";
 
 //ToDo: Sort posts by Published day.
 export default function NewsFeedScreen() {
@@ -19,20 +20,22 @@ export default function NewsFeedScreen() {
       loadNews();
     }, [2])
   );
-  // useEffect(() => {
-  //   loadNews();
-  // }, []);
+  useEffect(() => {
+    loadNews();
+  }, []);
 
   const loadNews = async () => {
     const response = await PostService.getPostForUser(user.email);
-    console.log(response.data);
-    setPosts(response.data);
+    if (!response.ok) setPosts(response.data);
+    else if (response.ok) console.log("Failed to load posts");
   };
   return (
-    <Screen style={styles.container}>
+    <Screen style={styles.container} statusPadding={false}>
+      <FeedTop />
       <FlatList
-        style={styles.flatlist}
+        style={styles.flatList}
         data={posts}
+        // ListHeaderComponent={() => <FeedListHeader />}
         keyExtractor={(post) => post.id.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
@@ -55,9 +58,8 @@ const styles = StyleSheet.create({
     display: "flex",
     flex: 1,
     justifyContent: "center",
-    paddingTop: 30,
   },
-  flatlist: {
-    padding: 10,
+  flatList: {
+    padding: 17,
   },
 });

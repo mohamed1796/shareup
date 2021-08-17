@@ -26,7 +26,7 @@ export default function Logo({ mainLogo, style }) {
 const styles = StyleSheet.create({
   logo: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.25,
+    height: Dimensions.get("window").height * 0.35,
     alignSelf: "center",
     marginBottom: 20,
   },
