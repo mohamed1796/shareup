@@ -8,10 +8,24 @@ export default function StoryCard() {
   return (
     <View style={styles.container}>
       <View style={styles.iconWrapper}>
-        <Image
-          source={require("../../assets/default-profile-picture.png")}
-          style={{ width: 50, height: 50 }}
+        <Icon
+          image={require("../../assets/icons/user-icon.png")}
+          backgroundColor={colors.grayX11Gray}
+          size={35}
         />
+      </View>
+      <Icon
+        name="pluscircle"
+        type="AntDesign"
+        size={25}
+        color={colors.iondigoDye}
+        backgroundSizeRatio={0.85}
+        style={styles.addIcon}
+      />
+
+      <View style={styles.textWrapper}>
+        <Text style={styles.text}>Create</Text>
+        <Text style={styles.text}>Story</Text>
       </View>
     </View>
   );
@@ -22,13 +36,27 @@ const styles = StyleSheet.create({
     width: 71,
     height: 113,
     borderWidth: 1.5,
-    // borderColor: colors.lighterGray,
+    borderColor: colors.lighterGray,
     borderRadius: 15,
     margin: 15,
+    overflow: "hidden",
   },
   iconWrapper: {
-    width: "100%",
-    height: "70%",
-    // backgroundColor: colors.grayX11Gray,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.grayX11Gray,
+    height: "60%",
+  },
+  textWrapper: {
+    justifyContent: "center",
+    alignItems: "center",
+    top: -8,
+  },
+  text: {
+    fontSize: 9,
+  },
+  addIcon: {
+    alignSelf: "center",
+    top: -5,
   },
 });

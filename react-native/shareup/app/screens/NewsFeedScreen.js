@@ -6,7 +6,6 @@ import PostService from "../services/PostService";
 import UserContext from "../UserContext";
 import Screen from "../components/Screen";
 import Card from "../components/lists/Card";
-import colors from "../config/colors";
 import FeedTop from "../components/FeedTop";
 
 //ToDo: Sort posts by Published day.
@@ -31,11 +30,10 @@ export default function NewsFeedScreen() {
   };
   return (
     <Screen style={styles.container} statusPadding={false}>
-      <FeedTop />
       <FlatList
         style={styles.flatList}
         data={posts}
-        // ListHeaderComponent={() => <FeedListHeader />}
+        ListHeaderComponent={() => <FeedTop />}
         keyExtractor={(post) => post.id.toString()}
         showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
@@ -60,6 +58,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   flatList: {
-    padding: 17,
+    // padding: 17,
   },
 });

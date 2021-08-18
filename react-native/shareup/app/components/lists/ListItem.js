@@ -39,12 +39,12 @@ export default function ListItem({
 
         {displayLeft && (
           <View style={styles.leftContainer}>
-            <Tab title="Send Request" style={styles.tab} />
+            <Tab title="Send Request" style={styles.tab} height={30} />
             <Icon
               name="close"
               type="AntDesign"
               backgroundSizeRatio={1}
-              size={15}
+              size={13}
             />
           </View>
         )}
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 10,
+    paddingVertical: 17,
   },
   detailsContainer: { marginLeft: 10, flex: 1 },
   image: { height: 50, width: 50, borderRadius: 35 },

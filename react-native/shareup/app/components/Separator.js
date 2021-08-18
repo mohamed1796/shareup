@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from "react-native";
 
 import colors from "../config/colors";
 
-export default function Separator({ text, style, color }) {
+export default function Separator({ text, style, color = colors.LightGray }) {
   const inside = () => {
     if (text)
       return (

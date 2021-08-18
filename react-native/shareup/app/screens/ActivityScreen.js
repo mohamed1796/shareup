@@ -89,7 +89,7 @@ export default function GroupsScreen(props) {
             image={item.image}
             title={item.name}
             subTitle={item.subTitle}
-            style={styles.listItem}
+            style={[styles.listItem, defaultStyles.lightShadow]}
             displayLeft={true}
           />
         )}
@@ -119,18 +119,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   listItem: {
-    margin: 5,
+    marginBottom: 13,
     marginHorizontal: 20,
     borderRadius: 10,
     backgroundColor: colors.white,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 6,
   },
 });

@@ -1,4 +1,4 @@
-import { Dimensions, Image, StyleSheet } from "react-native";
+import { Dimensions, Image, StyleSheet, Platform } from "react-native";
 
 import React from "react";
 
@@ -13,8 +13,8 @@ const renderImage = (mainLogo, style) => {
   else
     return (
       <Image
-        style={[styles.secondrylogo, style]}
-        source={require("../assets/secondry-logo.png")}
+        style={[styles.secondaryLogo, style]}
+        source={require("../assets/secondary-logo.png")}
       />
     );
 };
@@ -25,13 +25,18 @@ export default function Logo({ mainLogo, style }) {
 
 const styles = StyleSheet.create({
   logo: {
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height * 0.35,
+    width: "100%",
+    height:
+      Dimensions.get("window").height < 800
+        ? Dimensions.get("window").height * 0.25
+        : Dimensions.get("window").height * 0.35,
     alignSelf: "center",
     marginBottom: 20,
+
+    // resizeMode: "stretch",
   },
-  secondrylogo: {
-    width: 100,
-    height: 100,
+  secondaryLogo: {
+    width: 62,
+    height: 62,
   },
 });

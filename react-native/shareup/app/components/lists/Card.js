@@ -49,7 +49,7 @@ export default function Card({
   const actionsTabSizeRatio = 0.5;
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={[styles.card, style]}>
+      <View style={[styles.card, defaultStyles.cardBorder, style]}>
         {/** Post Image */}
         {imageURL && (
           <Image
@@ -127,6 +127,14 @@ export default function Card({
           </View>
 
           {postText !== "" && <Text style={styles.postText}>{postText}</Text>}
+
+          <Icon
+            name="options"
+            type="SimpleLineIcons"
+            style={styles.optionsIcon}
+            size={22}
+            backgroundSizeRatio={1}
+          />
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -136,14 +144,12 @@ export default function Card({
 const borderRadius = 10;
 const styles = StyleSheet.create({
   card: {
-    borderColor: colors.grayX11Gray,
-    borderWidth: 1,
     backgroundColor: colors.white,
-    marginBottom: 20,
+    marginHorizontal: 15,
+    marginTop: 10,
     overflow: "hidden",
     padding: 7,
     paddingHorizontal: 6,
-    borderRadius: borderRadius,
   },
   image: {
     width: "100%",
@@ -217,5 +223,9 @@ const styles = StyleSheet.create({
   },
   comments: {
     marginRight: 10,
+  },
+  optionsIcon: {
+    alignSelf: "flex-end",
+    top: 8,
   },
 });

@@ -9,12 +9,14 @@ export default {
     fontFamily: Platform.OS === "android" ? "Roboto" : "Avenir",
   },
   inputContainer: {
-    backgroundColor: colors.aliceBlue,
+    backgroundColor: colors.lighterGray,
     borderRadius: 25,
     flexDirection: "row",
     padding: 15,
-    marginVertical: 10,
+    paddingHorizontal: 30,
+    marginVertical: 5,
     alignItems: "center",
+    height: 50,
   },
   inputIcon: {
     marginRight: 10,
@@ -42,5 +44,21 @@ export default {
     shadowRadius: 3.84,
 
     elevation: 6,
+  },
+  lightShadow: {
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 1.84,
+
+    elevation: 3,
+  },
+  cardBorder: {
+    borderColor: colors.grayX11Gray,
+    borderWidth: 1,
+    borderRadius: 10,
   },
 };

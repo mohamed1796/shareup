@@ -1,7 +1,9 @@
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import Modal from "react-native-modal";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import routes from "./routes";
 import AddPostButton from "./AddPostButton";
@@ -35,7 +37,20 @@ const config = {
 };
 
 const Tab = createBottomTabNavigator();
+const Drawer = createDrawerNavigator();
+
 console.log(`Tab: `, Tab);
+
+function RandomScreen() {
+  return <Text>Just a Screen</Text>;
+}
+function GymDrawerNavigator() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Gym" component={RandomScreen} />
+    </Drawer.Navigator>
+  );
+}
 
 export default function AppNavigator() {
   // useNotifications();
@@ -44,111 +59,136 @@ export default function AppNavigator() {
     alert("This is add post button!");
   };
   return (
-    <Tab.Navigator>
-      <Tab.Screen
-        name="NewsFeed"
-        component={NewsFeedScreen}
-        options={{
-          header: () => <CustomHeaderBar />,
-          // headerTitle: "",
-          // headerLeft: () => <Icon image={require("../assets/main-logo.png")} />,
-          // headerRight: () => <View></View>,
-          tabBarLabel: "News Feed",
-          tabBarIcon: ({ size, color }) => (
-            <Icon
-              image={require("../assets/tab-navigation-icons/home-icon.png")}
-              size={size}
-            />
-          ),
+    <>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarShowLabel: false,
         }}
-      />
+      >
+        <Tab.Screen
+          name="NewsFeed"
+          component={NewsFeedScreen}
+          options={{
+            header: () => <CustomHeaderBar />,
+            // headerTitle: "",
+            // headerLeft: () => <Icon image={require("../assets/main-logo.png")} />,
+            // headerRight: () => <View></View>,
+            tabBarIcon: ({ size, color }) => (
+              <Icon
+                image={require("../assets/tab-navigation-icons/home-icon.png")}
+                size={size}
+              />
+            ),
+          }}
+        />
 
-      <Tab.Screen
-        name="Groups"
-        component={GroupsScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ size, color }) => (
-            <Icon
-              image={require("../assets/tab-navigation-icons/groups-icon.png")}
-              size={size}
-            />
-          ),
-        }}
-      />
+        <Tab.Screen
+          name="Groups"
+          component={GroupsScreen}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ size, color }) => (
+              <Icon
+                image={require("../assets/tab-navigation-icons/groups-icon.png")}
+                size={size}
+              />
+            ),
+          }}
+        />
 
-      <Tab.Screen
-        name="AddPost"
-        component={AddPostScreen}
-        options={({ navigation }) => ({
-          transitionSpec: {
-            open: config,
-            close: config,
-          },
-          tabBarLabel: "",
-          headerShown: false,
-          tabBarIcon: () => (
-            <AddPostButton
-              onPress={() => navigation.navigate(routes.ADD_POST)}
-            />
-          ),
-          headerLeft: ({ navigation }) => (
-            <IconButton
-              style={styles.button}
-              onPress={() => navigation.navigate(routes.FEED)}
-              IconComponent={
-                <Icon name="close" color={colors.dimGray} type="AntDesign" />
-              }
-            />
-          ),
-          headerRight: () => (
-            <Button
-              onPress={handleAddPost}
-              title="Post"
-              style={styles.button}
-            />
-          ),
-        })}
-      />
-
-      <Tab.Screen
-        name="Activity"
-        component={ActivityScreen}
-        options={{
-          headerTitle: "",
-          headerStyle: {
-            elevation: 0,
-            shadowRadius: 0,
-            shadowOffset: {
-              height: 0,
+        <Tab.Screen
+          name="AddPost"
+          component={AddPostScreen}
+          options={({ navigation }) => ({
+            transitionSpec: {
+              open: config,
+              close: config,
             },
-          },
-          headerRight: () => (
-            <UserProfilePicture size={50} style={styles.headerRight} />
-          ),
-          headerLeft: () => (
-            <Text style={[styles.headerLeft, defaultStyles.titleFontSize]}>
-              Activity
-            </Text>
-          ),
-          tabBarIcon: ({ size, color }) => (
-            <Icon
-              image={require("../assets/tab-navigation-icons/bell-icon.png")}
-              size={size}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Account"
-        component={AccountScreen}
-        options={{
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons name="account" size={size} color={color} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+            headerShown: false,
+            tabBarIcon: () => (
+              <AddPostButton
+                onPress={() => navigation.navigate(routes.ADD_POST)}
+              />
+            ),
+            headerLeft: ({ navigation }) => (
+              <IconButton
+                style={styles.button}
+                onPress={() => navigation.navigate(routes.FEED)}
+                IconComponent={
+                  <Icon name="close" color={colors.dimGray} type="AntDesign" />
+                }
+              />
+            ),
+            headerRight: () => (
+              <Button
+                onPress={handleAddPost}
+                title="Post"
+                style={styles.button}
+              />
+            ),
+          })}
+        />
+
+        <Tab.Screen
+          name="Activity"
+          component={ActivityScreen}
+          options={{
+            headerTitle: "",
+            headerStyle: {
+              elevation: 0,
+              shadowRadius: 0,
+              shadowOffset: {
+                height: 0,
+              },
+            },
+            headerRight: () => (
+              <UserProfilePicture size={50} style={styles.headerRight} />
+            ),
+            headerLeft: () => (
+              <Text style={[styles.headerLeft, defaultStyles.titleFontSize]}>
+                Activity
+              </Text>
+            ),
+            tabBarIcon: ({ size, color }) => (
+              <Icon
+                image={require("../assets/tab-navigation-icons/bell-icon.png")}
+                size={size}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Account"
+          component={AccountScreen}
+          options={{
+            tabBarIcon: ({ size, color }) => (
+              // <Icon
+              //   name="menu"
+              //   type="Feather"
+              //   backgroundSizeRatio={1}
+              //   size={size}
+              //   color={color}
+              // />
+              <TouchableWithoutFeedback onPress={() => alert("Heloooooo")}>
+                <View style={styles.menu}>
+                  <Icon
+                    name="menu"
+                    type="Feather"
+                    backgroundSizeRatio={1}
+                    size={size}
+                    color={color}
+                  />
+                </View>
+              </TouchableWithoutFeedback>
+            ),
+          }}
+        />
+      </Tab.Navigator>
+
+      {/* <Modal isVisible={true} style={styles.modal}>
+        <Text>This is modal</Text>
+      </Modal> */}
+    </>
   );
 }
 
@@ -165,5 +205,17 @@ const styles = StyleSheet.create({
   headerRight: {
     marginRight: 10,
     margin: 5,
+  },
+  menu: {
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modal: {
+    height: "50%",
+    width: "80%",
+    backgroundColor: "white",
+    position: "absolute",
   },
 });

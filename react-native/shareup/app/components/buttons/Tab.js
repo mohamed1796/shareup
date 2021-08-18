@@ -18,6 +18,8 @@ export default function AppButton({
   iconColor = "",
   iconSize = 22 * sizeRatio,
   fontColor = colors.dark,
+  fontWeight = "normal",
+  titleStyle,
 }) {
   const renderIcon = () => {
     if (iconName)
@@ -67,7 +69,9 @@ export default function AppButton({
             fontSize: 13 * sizeRatio,
             marginLeft: 5 * sizeRatio,
             color: fontColor,
+            fontWeight: fontWeight,
           },
+          titleStyle,
         ]}
       >
         {title}

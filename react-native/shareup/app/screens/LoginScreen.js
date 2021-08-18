@@ -9,7 +9,7 @@ import {
 import React, { useContext, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
-import AlternativeRegistrationContianer from "../components/AlternativeRegistrationContianer";
+import AlternativeRegistrationContainer from "../components/AlternativeRegistrationContainer";
 import AuthService from "../services/auth.services";
 import IconButton from "../components/buttons/IconButton";
 import LinkButton from "../components/buttons/LinkButton";
@@ -97,8 +97,9 @@ export default function LoginScreen({ navigation }) {
             icon="email"
             keyboardType="email-address"
             name="email"
-            placeholder="Email"
+            placeholder="Email Address"
             textContentType="emailAddress" // Only for ios
+            style={styles.formField}
           />
 
           <FormField
@@ -109,15 +110,16 @@ export default function LoginScreen({ navigation }) {
             placeholder="Password"
             secureTextEntry
             textContentType="password" // Only for ios
+            style={styles.formField}
           />
-          <SubmitButton title="Share in" />
+          <SubmitButton title="Share in" style={styles.submitButton} />
           <LinkButton title="Forgot password?" style={styles.linkedButton} />
         </View>
       </Form>
 
-      <AlternativeRegistrationContianer />
+      <AlternativeRegistrationContainer />
 
-      <Separator text="or" style={styles.saperator} />
+      <Separator text="or" style={styles.separator} />
 
       <View style={styles.thirdContainer}>
         <LinkButton
@@ -134,7 +136,7 @@ export default function LoginScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   formContainer: {
-    padding: 20,
+    paddingHorizontal: 20,
     alignItems: "center",
   },
   thirdContainer: {
@@ -156,7 +158,15 @@ const styles = StyleSheet.create({
   iconButton: {
     margin: 20,
   },
-  saperator: {
+  separator: {
     paddingHorizontal: 20,
+  },
+  formField: {
+    width: "90%",
+    marginBottom: 5,
+  },
+  submitButton: {
+    width: "60%",
+    marginTop: 20,
   },
 });

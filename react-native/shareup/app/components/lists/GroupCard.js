@@ -9,7 +9,7 @@ const height = Dimensions.get("window").height / 3;
 
 export default function GroupCard({ style, image, title }) {
   return (
-    <View style={[styles.container, style]}>
+    <View style={[defaultStyle.cardBorder, style]}>
       {image ? (
         <Image source={image} style={styles.image} />
       ) : (
@@ -25,9 +25,9 @@ export default function GroupCard({ style, image, title }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.LightGray,
     width: width,
     height: height,
+    backgroundColor: colors.LightGray,
     borderRadius: 10,
   },
   image: {

@@ -13,7 +13,7 @@ export default function AppTextInput({
   icon,
   width = "100%",
   centerText = false,
-  backgroundColor = colors.aliceBlue,
+  backgroundColor = colors.lighterGray,
   ...otherProps
 }) {
   return (
@@ -30,7 +30,12 @@ export default function AppTextInput({
         placeholderTextColor={colors.dimGray}
         style={[
           defaultStyles.text,
-          { width: "100%", textAlign: centerText ? "center" : "auto" },
+          {
+            width: "100%",
+            textAlign: centerText ? "center" : "auto",
+            height: 50,
+            fontSize: 16,
+          },
         ]}
         {...otherProps}
       />

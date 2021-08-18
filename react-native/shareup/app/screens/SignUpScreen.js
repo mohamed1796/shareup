@@ -9,11 +9,11 @@ import {
 } from "../components/forms";
 import React, { useState } from "react";
 
-import AlternativeRegistrationContianer from "../components/AlternativeRegistrationContianer";
+import AlternativeRegistrationContainer from "../components/AlternativeRegistrationContainer";
 import Logo from "../components/Logo";
 import Screen from "../components/Screen";
 import Separator from "../components/Separator";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Text from "../components/Text";
 import UserService from "../services/UserService";
 import authApi from "../api/auth";
@@ -146,69 +146,76 @@ export default function SignUpScreen({ navigation }) {
       {/* <ActivityIndicator visible={registerApi.loading || loginApi.loading} /> */}
       <Screen style={styles.screen}>
         <Logo style={styles.logo} />
-        <Text style={styles.title}>Register</Text>
-        <Form
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            // birthday: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
-          }}
-          onSubmit={handleSubmit}
-          validationSchema={validationSchema}
-        >
-          <ErrorMessage error={error} visible={error} />
-          <FormField
-            autoCorrect={false}
-            name="firstName"
-            placeholder="First Name"
-          />
-          <FormField
-            autoCorrect={false}
-            name="lastName"
-            placeholder="Last Name"
-          />
+        <View style={styles.center}>
+          <Text style={styles.title}>Register</Text>
+          <Form
+            initialValues={{
+              firstName: "",
+              lastName: "",
+              // birthday: "",
+              email: "",
+              password: "",
+              confirmPassword: "",
+            }}
+            onSubmit={handleSubmit}
+            validationSchema={validationSchema}
+          >
+            <View style={styles.formContainer}>
+              <ErrorMessage error={error} visible={error} />
+              <FormField
+                autoCorrect={false}
+                name="firstName"
+                placeholder="First Name"
+              />
+              <FormField
+                autoCorrect={false}
+                name="lastName"
+                placeholder="Last Name"
+              />
 
-          {/* <FormField
+              {/* <FormField
             autoCorrect={false}
             name="birthday"
             placeholder="Enter your Birthday..."
           /> */}
 
-          {/* <FormPicker name="gender" items={items} placeholder="choose your gender"/> */}
+              {/* <FormPicker name="gender" items={items} placeholder="choose your gender"/> */}
 
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="email-address"
-            name="email"
-            placeholder="Email"
-            textContentType="emailAddress" // Only for ios
-          />
+              <FormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="email-address"
+                name="email"
+                placeholder="Email"
+                textContentType="emailAddress" // Only for ios
+              />
 
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            name="password"
-            placeholder="Password"
-            secureTextEntry // for password
-            textContentType="password" // Only for ios
-          />
-          <FormField
-            autoCapitalize="none"
-            autoCorrect={false}
-            name="confirmPassword"
-            placeholder="Re-Enter passowrd"
-            secureTextEntry // for password
-            textContentType="password" // Only for ios
-          />
-          <SubmitButton title="Let's Share in?" />
-        </Form>
-        <Separator text="or" />
+              <FormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                name="password"
+                placeholder="Password"
+                secureTextEntry // for password
+                textContentType="password" // Only for ios
+              />
+              <FormField
+                autoCapitalize="none"
+                autoCorrect={false}
+                name="confirmPassword"
+                placeholder="Re-Enter passowrd"
+                secureTextEntry // for password
+                textContentType="password" // Only for ios
+              />
+              <SubmitButton
+                title="Let's Share in?"
+                style={styles.submitButton}
+              />
+            </View>
+          </Form>
+          <Separator text="or" />
 
-        <AlternativeRegistrationContianer />
+          <AlternativeRegistrationContainer />
+        </View>
       </Screen>
     </>
   );
@@ -222,6 +229,7 @@ const styles = StyleSheet.create({
   screen: {
     paddingTop: 20,
     padding: 20,
+    // justifyContent: "center",
   },
   title: {
     fontWeight: "600",
@@ -229,5 +237,17 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     margin: 10,
     marginTop: 20,
+  },
+  formContainer: {
+    paddingHorizontal: 25,
+  },
+  submitButton: {
+    alignSelf: "center",
+    width: "70%",
+    paddingTop: "10%",
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
   },
 });
